@@ -1,4 +1,23 @@
 1. PVP and turn based
 2. Some sort of map
 3. Resource and territorial nodes
-4.
+4. Different kinds of ants
+5. 2 teams red vs blue
+6. Different territories have different buffs
+7. Multiple resource types (but not too many)
+8. start with just queen ant + small amount of resources stock piled
+9. ants take up resources each turn and take time to make (some are instant)
+10. queen can be upgraded to produce more ants
+11. rare powerup to get a second queen
+12. 3 action points per turn (eg invade 3 times, produce 3 ants)
+
+
+
+
+
+
+
+ignore this for now:
+. turn counter
+. start page
+.

@@ -1,18 +1,26 @@
-# This is a sample Python script.
+import pygame.event
 
-# Press Shift+F10 to execute it or replace it with your code.
-# Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
+import Game
 
-print("Pueblos de hormigas")
+game = Game.Game(600)
+pygame.init()
+running = True
+while running:
+    pressed_keys = pygame.key.get_pressed()
+    node = None
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            running = False
+            break
+        elif event.type == pygame.MOUSEBUTTONUP:
+            mouse_pos = pygame.mouse.get_pos()
+            node = game.node_at_pos(mouse_pos[0], mouse_pos[1])
+            game.choose_action(node, 0)
+        elif event.type == pygame.KEYUP:
+            if event.key == pygame.K_1:
+                game.choose_action(node, 1)
+            elif event.key == pygame.K_2:
+                game.choose_action(node, 2)
 
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press Ctrl+F8 to toggle the breakpoint.
 
-
-# Press the green button in the gutter to run the script.
-if __name__ == '__main__':
-    print_hi('PyCharm')
-
-
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
+    game.draw()

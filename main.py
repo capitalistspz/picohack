@@ -15,12 +15,13 @@ while running:
         elif event.type == pygame.MOUSEBUTTONUP:
             mouse_pos = pygame.mouse.get_pos()
             node = game.node_at_pos(mouse_pos[0], mouse_pos[1])
+            print(f"Node :{type(node)}")
             game.choose_action(node, 0)
         elif event.type == pygame.KEYUP:
             if event.key == pygame.K_1:
                 game.choose_action(node, 1)
             elif event.key == pygame.K_2:
                 game.choose_action(node, 2)
-
+        game.update_nodes()
 
     game.draw()

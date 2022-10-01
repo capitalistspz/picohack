@@ -32,12 +32,12 @@ class Game:
         for i in range(0, 5):
             col = []
             for j in range(0, 5):
-                col.append(Node())
+                col.append(Node(team=Team.NONE))
             self.__grid.append(col)
-        node_a = Node()
+        node_a = Node(Team.RED)
         node_a.colour = Colours.RED
 
-        node_b = Node()
+        node_b = Node(Team.BLUE)
         node_b.colour = Colours.BLUE
         self.__player_list.append(Player(0, Team.BLUE))
         self.__player_list.append(Player(1, Team.RED))
@@ -49,7 +49,8 @@ class Game:
         x_val = x / 120
         y_val = y / 120
 
-        if 0 <= x_val > self.__size or 0 <= y_val > self.__size:
+        if 0 <= x > self.__size or 0 <= y > self.__size:
+            print(f"Pos out of bounds: ({x}, {y})")
             return None
 
         grid_x = int(math.floor(x_val))
@@ -59,11 +60,12 @@ class Game:
 
         return self.__grid[grid_x][grid_y]
 
-    def choose_action(self, node, chosen_action) -> bool:
+    def choose_action(self, node: Node, chosen_action) -> bool:
         player = self.__player_list[self.__current_player]
 
         if player.action_points <= 0:
-            print(f"No action points remaining")
+            print(f"No action points remaining, switching player")
+            self.switch_player()
             return False
         if self.__popup is None:
             self.display_choose_opt_dialogue(pygame.mouse.get_pos())
@@ -78,13 +80,19 @@ class Game:
         elif chosen_action == 2:
             player.add_random_ant()
             player.action_points -= 1
-
+        else:
+            return False
         self.__popup = None
-
+        return True
     def display_choose_opt_dialogue(self, pos: tuple[int, int]):
         font = pygame.font.Font(None, 24)
         img = font.render('1: Use one ant for attack, 2: Create new ant', True, Colours.BLACK)
         self.__popup = (img, pos)
+
+    def update_nodes(self):
+        for i in range(len(self.__grid)):
+            for j in range(len(self.__grid[0])):
+                self.__grid[i][j].update()
     def draw(self):
         self.__screen.fill(Colours.WHITE)
 

@@ -8,8 +8,9 @@ class AntType(Enum):
 
 
 class Team(Enum):
-    RED = 0,
-    BLUE = 1
+    NONE = 0,
+    RED = 1,
+    BLUE = 2
 
 
 class AntAbility:

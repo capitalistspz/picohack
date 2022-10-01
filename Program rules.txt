@@ -1,0 +1,4 @@
+1. PVP and turn based
+2. Some sort of map
+3. Resource and territorial nodes
+4.
